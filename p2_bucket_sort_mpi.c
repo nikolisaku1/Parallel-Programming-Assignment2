@@ -1,3 +1,12 @@
+/* Parallel Bucket Sort using MPI
+ *
+ * Array: 1000 random integers in [1, 250]
+ * Each worker process sorts its own bucket, master collects and prints.
+ *
+ * Compile: mpicc -o p2_bucket_sort_mpi p2_bucket_sort_mpi.c
+ * Run:     mpiexec -n 5 ./p2_bucket_sort_mpi
+ *          (use any number of worker processes up to 100)
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
