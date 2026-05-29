@@ -1,0 +1,1 @@
+parallel programming thread process mutex semaphore barrier reduction scatter gather broadcast pipeline deadlock starvation race condition synchronization critical section atomic lock spinlock
