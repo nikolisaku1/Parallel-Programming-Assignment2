@@ -1,3 +1,12 @@
+/* Producer-Consumer using OpenMP
+ *
+ * Producers: read words from files (one file per producer thread)
+ * Consumers: tokenize and display words from the shared buffer
+ * Buffer limit: 10 words (circular buffer, bounded)
+ *
+ * Compile: gcc -fopenmp -o p3a_openmp p3a_openmp.c
+ * Run:     ./p3a_openmp
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
