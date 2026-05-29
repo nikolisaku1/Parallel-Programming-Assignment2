@@ -1,3 +1,9 @@
+/* Random Restart Hill Climbing using OpenMP
+ *
+ * Compile: gcc -fopenmp -o p1b_openmp p1b_openmp.c -lm
+ * Run:     ./p1b_openmp <numRestarts> <numThreads> <minX> <maxX> <minY> <maxY> <stepSize>
+ * Example: ./p1b_openmp 1000 4 0 10 0 10 0.01
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
