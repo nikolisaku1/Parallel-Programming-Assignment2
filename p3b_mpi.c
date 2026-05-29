@@ -1,4 +1,4 @@
- * Producer-Consumer using MPI
+ /* Producer-Consumer using MPI
  *
  * Rank 0            : master / coordinator
  * Ranks 1..P        : producers (read files, send words to master buffer)
