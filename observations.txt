@@ -1,5 +1,4 @@
 OpenMP vs MPI Producer-Consumer: Comparative Analysis
-------------------------------------------------------
 
 1. SPEED
    The OpenMP version is generally faster for the same machine because:
