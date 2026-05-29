@@ -1,0 +1,40 @@
+OpenMP vs MPI Producer-Consumer: Comparative Analysis
+------------------------------------------------------
+
+1. SPEED
+   The OpenMP version is generally faster for the same machine because:
+   - Threads share memory directly; no serialisation of messages needed.
+   - No network stack overhead – a word is placed in the shared buffer
+     with a single pointer write, whereas MPI must copy the payload
+     into a message envelope and send it through the MPI runtime.
+   - The spin-wait loop in OpenMP costs CPU cycles, but it is still
+     cheaper than a blocking MPI_Send/Recv round-trip for small messages.
+
+2. OVERHEAD AND CORRECTNESS REQUIREMENTS
+   MPI requires significantly more boilerplate for correctness:
+   - A dedicated master rank is needed to act as the buffer, because
+     processes cannot share memory.
+   - Tag management (TAG_WORD, TAG_DONE, TAG_TOKEN, TAG_STOP) must be
+     carefully designed to avoid deadlocks or missed signals.
+   - The master must handle back-pressure (full buffer) explicitly,
+     whereas the OpenMP version handles it naturally with a shared lock
+     and a spin-wait.
+   - Message ordering is harder to reason about in MPI; MPI_ANY_SOURCE
+     probes introduce non-determinism that must be accounted for.
+   OpenMP requires only a single mutex (omp_lock_t) to protect the
+   shared buffer and a simple integer counter for finished producers.
+
+3. FIXED NUMBER OF THREADS/PROCESSES
+   - At small counts (e.g. 5 threads/processes), OpenMP wins because
+     thread creation is cheaper than process creation and IPC overhead
+     is negligible.
+   - At large counts, MPI can scale across multiple nodes (distributed
+     memory), while OpenMP is limited to one shared-memory machine.
+   - For purely local runs with the same process/thread count, OpenMP
+     is consistently faster due to zero message-passing overhead.
+
+4. SUMMARY
+   Use OpenMP when you need fast, simple shared-memory producer-consumer
+   on a single node. Use MPI when scalability across nodes is required
+   or when processes cannot share an address space. The MPI version
+   trades simplicity and speed for portability and scalability.
