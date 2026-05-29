@@ -1,3 +1,9 @@
+/* Random Restart Hill Climbing using MPI
+ *
+ * Compile: mpicc -o p1c_mpi p1c_mpi.c -lm
+ * Run:     mpiexec -n 4 ./p1c_mpi <numRestarts> <minX> <maxX> <minY> <maxY> <stepSize>
+ * Example: mpiexec -n 4 ./p1c_mpi 1000 0 10 0 10 0.01
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
