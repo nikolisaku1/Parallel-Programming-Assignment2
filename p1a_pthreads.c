@@ -1,3 +1,9 @@
+/* Random Restart Hill Climbing using POSIX Threads
+ *
+ * Compile: gcc -o p1a_pthreads p1a_pthreads.c -lpthread -lm
+ * Run:     ./p1a_pthreads <numRestarts> <numThreads> <minX> <maxX> <minY> <maxY> <stepSize>
+ * Example: ./p1a_pthreads 1000 4 0 10 0 10 0.01
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
